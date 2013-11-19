@@ -10,6 +10,7 @@ var PageMaker = require('../src')
 
 program
   .option('-t, --template <path|name>', 'the template to use')
+  .option('-d, --datafile <path>', 'use a json file (e.g. package.json) as the base data')
   .option('-i, --infile <path>', 'the input markdown file - stdin is default')
   .option('-o, --outfile <path>', 'the output HTML file - stdout is default')
   .version(version)
@@ -22,7 +23,8 @@ program
     var maker = new PageMaker({
       infile:infile || program.infile,
       outfile:outfile || program.outfile,
-      template:program.template
+      template:program.template,
+      datafile:program.datafile
     });
 
     maker.convert();

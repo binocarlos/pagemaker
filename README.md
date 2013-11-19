@@ -3,6 +3,12 @@ pagemaker
 
 merge together markdown with front-matter and a mustache template
 
+the one-liner for simple node.js projects
+
+```
+pagemaker convert -i README.md -d package.json -o index.html
+```
+
 ## example
 
 Convert a markdown page into a HTML page using the standard template
@@ -49,18 +55,26 @@ $ pagemaker convert -t template.html index.md index.html
 $ sudo npm install pagemaker -g
 ```
 
-## Commands
-
-### convert
+## help
 
 ```
-convert [infile] [outfile]
+  Usage: pagemaker [options] [command]
+
+  Commands:
+
+    convert [infile] [outfile] create a HTML page from a markdown input
+    *
+
+  Options:
+
+    -h, --help                  output usage information
+    -t, --template <path|name>  the template to use
+    -d, --datafile <path>       use a json file (e.g. package.json) as the base data
+    -i, --infile <path>         the input markdown file - stdin is default
+    -o, --outfile <path>        the output HTML file - stdout is default
+    -V, --version               output the version number
+
 ```
-
-Takes a markdown with front matter and a mustache template and outputs HTML of the two rendered together
-
-If the infile is unspecified then stdin is used.
-If the outfile is unspecified then stdout is used.
 
 ## licence
 MIT

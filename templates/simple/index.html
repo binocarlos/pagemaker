@@ -4,7 +4,7 @@
 <html>
   
   <head>
-    <title>{{ title }}</title>
+    <title>{{ name }}</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="//yandex.st/highlightjs/7.4/styles/default.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
@@ -13,7 +13,7 @@
   </head>
   
   <body>
-    <div class="container text-center">
+    <div class="container">
 
       <!--
         HEADER ROW
@@ -23,14 +23,12 @@
           
         </div>
         <div class="col-lg-6">
-          <h1 class="page-header">Buddy <small>(0.0.1)</small></h1>
+          <h1 class="page-header">{{ name }} {{ version }}</h1>
 
-          <p class="lead">Turn HTML content into an animating 3d book!</p>
-
-          <p><small>Also the name of the <a href="http://www.storytimeisland.com">Story Time Island</a> cat.</small></p>
+          <p class="lead">{{ description }}</p>
 
           <div class="list-group" style="margin-top:25px">
-            <a class="list-group-item" href="https://github.com/binocarlos/buddy">View on GitHub</a>            
+            <a class="list-group-item" href="{{{ repository.url }}}">View on GitHub</a>            
           </div>
         </div>
       </div>
@@ -40,7 +38,7 @@
        -->
       <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
-          {{ body }}
+          {{{ body }}}
         </div>
       </div>
     </div>

@@ -22,6 +22,20 @@ var fs = require('fs');
 var Mustache = require('Mustache');
 var async = require('async');
 var path = require('path');
+var fm = require('front-matter');
+var marked = require('marked');
+
+marked.setOptions({
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false,
+  langPrefix: ''
+})
+
 
 /*
 
@@ -47,6 +61,9 @@ PageMaker.prototype.convert = function(done){
 		},
 		infile:function(next){
 			self.read_infile(next);
+		},
+		datafile:function(next){
+			self.read_data(next);
 		}
 	}, function(error, files){
 
@@ -65,10 +82,55 @@ PageMaker.prototype.convert = function(done){
 			process.exit();
 		}
 
-		self.write_output(files.infile, function(){
+		if(!files.datafile){
+			console.error('no data found');
 			process.exit();
+		}
+
+		var frontmatter = fm(files.infile);
+		var matterdata = frontmatter.attributes;
+
+		marked(frontmatter.body, function (err, html){
+			if(err){
+				console.error(error);
+				process.exit();
+			}
+
+			var view = files.datafile;
+
+			Object.keys(matterdata || {}).forEach(function(key){
+				view[key] = matterdata[key];
+			})
+
+			view.body = html;
+
+			var output = Mustache.render(files.template, view);
+
+			self.write_output(output, function(){
+				process.exit();
+			})
 		})
+
+		
 	})
+}
+
+PageMaker.prototype.read_data = function(done){
+	var file = this.options.datafile;
+
+	if(!file){
+		done(null, {});
+		return;
+	}
+
+  if(file.charAt(0)!='/'){
+    file = path.normalize(process.cwd() + '/' + file);
+  }
+
+  fs.readFile(file, 'utf8', function(error, data){
+  	data = JSON.parse(data);
+  	done(error, data);
+  });
 }
 
 PageMaker.prototype.read_template = function(done){
