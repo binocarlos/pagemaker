@@ -1,6 +1,6 @@
 {
   "name": "pagemaker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "merges together markdown with a HTML template",
   "main": "src/index.js",
   "preferGlobal": "true",
