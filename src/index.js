@@ -182,7 +182,12 @@ PageMaker.prototype.read_infile = function(done){
 
 PageMaker.prototype.write_output = function(content, done){
 	if(this.options.outfile){
-		fs.writeFile(this.options.outfile, content, 'utf8', done);
+		if(this.options.outfile=='silent'){
+			done();
+		}
+		else{
+			fs.writeFile(this.options.outfile, content, 'utf8', done);	
+		}
 	}
 	else{
 		process.stdout.write(content);

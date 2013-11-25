@@ -35,7 +35,7 @@ program
       datafile:program.datafile
     });
 
-    maker.convert(function(){
+    maker.convert(function(error, output){
       process.exit();
     });
   })
