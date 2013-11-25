@@ -149,7 +149,12 @@ PageMaker.prototype.read_data = function(done){
 }
 
 PageMaker.prototype.read_template = function(done){
-	var template = this.options.template || 'simple';
+	var template = this.options.template;
+
+	if(!template){
+		done();
+		return;
+	}
 
   if(template.charAt(0)=='.'){
     template = path.normalize(process.cwd() + '/' + template);
