@@ -10,7 +10,8 @@ describe('PageMaker', function(){
 
     page.extract(function(error, data){
     	data.hello.should.equal('world');
-    	data.body.should.equal("<p>123</p>\n");
+    	data.html.should.equal("<p>123</p>\n");
+      data.body.should.equal("\n123");
     	done();
     })
     

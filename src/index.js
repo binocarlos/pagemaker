@@ -122,7 +122,8 @@ PageMaker.prototype.extract = function(done){
 				view[key] = matterdata[key];
 			})
 
-			view.body = html;
+			view.html = html;
+			view.body = frontmatter.body;
 
 			done(null, view);
 		})		
