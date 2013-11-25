@@ -6,7 +6,7 @@
 var version = require(__dirname + '/../package.json').version;
 var program = require("commander");
 var PageMaker = require('../src')
-
+var fs = require('fs');
 
 program
   .option('-t, --template <path|name>', 'the template to use')
@@ -19,6 +19,14 @@ program
   .command('convert')
   .description('create a HTML page from a markdown input')
   .action(function(infile, outfile){
+
+    var has_template = fs.existsSync(program.template);
+
+    if(!has_template){
+      console.error('template not found: ' + program.template);
+      process.exit();
+    }
+
 
     var maker = new PageMaker({
       infile:program.infile,

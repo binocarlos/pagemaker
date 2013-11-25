@@ -24,7 +24,7 @@ describe('PageMaker', function(){
     });
 
     page.convert(function(error, output){
-  		output.should.equal('world');
+  		output.should.equal("world\n<p>123</p>\n");
       fs.unlink(__dirname + '/test.html', done);
     })
     
