@@ -36,7 +36,7 @@ program
 program
   .command('*')
   .action(function(command){
-    console.log('makepages version ' + version + ' - \'makepages --help\' for more info');
+    console.log('pagemaker version ' + version + ' - \'pagemaker --help\' for more info');
   });
 
 if(process.argv.length<=2){

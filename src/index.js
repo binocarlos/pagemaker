@@ -75,7 +75,9 @@ PageMaker.prototype.convert = function(done){
 
 		var output = Mustache.render(values.template, values.data);
 
-		self.write_output(output, done);
+		self.write_output(output, function(){
+			done(null, output);
+		})
 	})
 }
 

@@ -23,11 +23,9 @@ describe('PageMaker', function(){
     	template:__dirname + '/template.html'
     });
 
-    page.convert(function(error){
-    	fs.readFile(__dirname + '/test.html', 'utf8', function(error, content){
-    		content.should.equal('world');
-        fs.unlink(__dirname + '/test.html', done);
-    	})
+    page.convert(function(error, output){
+  		output.should.equal('world');
+      fs.unlink(__dirname + '/test.html', done);
     })
     
   })
