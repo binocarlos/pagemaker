@@ -46,7 +46,7 @@ $ cat input.md | pagemaker convert -t template.html > index.html
 Or by explicitly naming the input and output:
 
 ```
-$ pagemaker convert -t template.html index.md index.html
+$ pagemaker convert -t template.html -i index.md -o index.html
 ```
 
 ## installation
@@ -62,7 +62,7 @@ $ sudo npm install pagemaker -g
 
   Commands:
 
-    convert [infile] [outfile] create a HTML page from a markdown input
+    convert create a HTML page from a markdown input
     *
 
   Options:

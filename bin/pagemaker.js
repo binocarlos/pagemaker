@@ -16,18 +16,20 @@ program
   .version(version)
 
 program
-  .command('convert [infile] [outfile]')
+  .command('convert')
   .description('create a HTML page from a markdown input')
   .action(function(infile, outfile){
 
     var maker = new PageMaker({
-      infile:infile || program.infile,
-      outfile:outfile || program.outfile,
+      infile:program.infile,
+      outfile:program.outfile,
       template:program.template,
       datafile:program.datafile
     });
 
-    maker.convert();
+    maker.convert(function(){
+      process.exit();
+    });
   })
 
 // run help if the command is not known or they just type 'digger'

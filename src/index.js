@@ -59,6 +59,29 @@ PageMaker.prototype.convert = function(done){
 		template:function(next){
 			self.read_template(next);
 		},
+		data:function(next){
+			self.extract(next);
+		}
+	}, function(error, values){
+		if(error){
+			console.error(error);
+			process.exit();
+		}
+		
+		if(!values.template){
+			console.error('no template found');
+			process.exit();
+		}
+
+		var output = Mustache.render(values.template, values.data);
+
+		self.write_output(output, done);
+	})
+}
+
+PageMaker.prototype.extract = function(done){
+	var self = this;
+	async.parallel({
 		infile:function(next){
 			self.read_infile(next);
 		},
@@ -69,11 +92,6 @@ PageMaker.prototype.convert = function(done){
 
 		if(error){
 			console.error(error);
-			process.exit();
-		}
-		
-		if(!files.template){
-			console.error('no template found');
 			process.exit();
 		}
 
@@ -104,14 +122,8 @@ PageMaker.prototype.convert = function(done){
 
 			view.body = html;
 
-			var output = Mustache.render(files.template, view);
-
-			self.write_output(output, function(){
-				process.exit();
-			})
-		})
-
-		
+			done(null, view);
+		})		
 	})
 }
 
