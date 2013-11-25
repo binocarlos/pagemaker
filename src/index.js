@@ -156,11 +156,8 @@ PageMaker.prototype.read_template = function(done){
 		return;
 	}
 
-  if(template.charAt(0)=='.'){
+  if(template.charAt(0)!='/'){
     template = path.normalize(process.cwd() + '/' + template);
-  }
-  else if(template.charAt(0)!='/'){
-    template = path.normalize(__dirname + '/../templates/' + template + '/index.html');
   }
 
   fs.readFile(template, 'utf8', done);
