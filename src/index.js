@@ -22,7 +22,8 @@ var fs = require('fs');
 var Mustache = require('Mustache');
 var async = require('async');
 var path = require('path');
-var fm = require('front-matter');
+//var fm = require('front-matter');
+var fm = require('./frontmatter');
 var marked = require('marked');
 
 marked.setOptions({
