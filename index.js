@@ -1,6 +1,7 @@
 var Emitter = require('emitter')
 var BookBinding = require('bookbinding')
 var PageTurner = require('pageturner')
+var PageHammer = require('pagehammer')
 
 module.exports = PageMaker;
 
