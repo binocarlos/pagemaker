@@ -17,7 +17,7 @@ function PageMaker (data, opts) {
       opts[key] = defaults[key]
     }
   })
-  this._data = data
+  this._data = data || []
   this._opts = opts
   this.build()
 }
@@ -25,20 +25,22 @@ function PageMaker (data, opts) {
 Emitter(PageMaker.prototype)
 
 PageMaker.prototype.build = function () {
+  var self = this;
+
   this._book = PageTurner()
   this._binding = BookBinding()
   this._hammer = PageHammer()
 
-  this._book.on('render', function(elem){
+  this._book.on('render:book', function(elem){
     self._hammer.setup(elem)
   })
   this._hammer.on('swipe', function(side, direction){
     self._book.turnDirection(direction)
   })
 
-  this._binding.appendChild(this._book.render())
-
   this._book.loadData(this._data)
+  this._binding.appendChild(this._book.render())
+  this._book.loadPage(0)
 }
 
 PageMaker.prototype.book = function () {
