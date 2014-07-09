@@ -1,0 +1,17 @@
+{
+  "name": "pagemaker",
+  "description": "The default iboard storytime book template",
+  "version": "0.0.3",
+  "keywords": [],
+  "dependencies": {
+    "binocarlos/bookbinding": "*",
+    "binocarlos/pageturner": "*",
+    "binocarlos/pagehammer": "*"
+  },
+  "development": {},
+  "styles": [],
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
