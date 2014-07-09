@@ -38,7 +38,7 @@ PageMaker.prototype.build = function () {
 
   this._binding.appendChild(this._book.render())
 
-  this._book.setData(this._data)
+  this._book.loadData(this._data)
 }
 
 PageMaker.prototype.book = function () {
