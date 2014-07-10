@@ -58,11 +58,11 @@ PageMaker.prototype.book = function () {
 PageMaker.prototype.buildArrows = function () {
   var self = this;
   this.arrows = this._arrows = PageArrows(this._opts.arrows || {})
-  this._arrows.on('render', function(elem, index){
-    self.emit('arrows:render', elem, index)
+  this._arrows.on('render', function(elem, side){
+    self.emit('arrows:render', elem, side)
   })
   this._arrows.on('click', function(side, direction){
-    self.book.turnDirection(direction)
+    self._book.turnDirection(direction)
   })
   this._book.on('view:index', function(index, pageCount){
     self._arrows.setPage(index, pageCount)
