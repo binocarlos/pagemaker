@@ -55,6 +55,7 @@ PageMaker.prototype.book = function () {
 }
 
 PageMaker.prototype.buildArrows = function () {
+  var self = this;
   this.arrows = this._arrows = PageArrows()
   this._arrows.on('render', function(elem, index){
     self.emit('arrows:render', elem, index)
