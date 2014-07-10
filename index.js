@@ -33,7 +33,7 @@ PageMaker.prototype.build = function () {
   this._book = PageTurner()
   this._binding = BookBinding()
   this._hammer = PageHammer()
-  this._shadows = PageShadows()
+  this._shadows = PageShadow()
 
   this.buildArrows()
   this.buildNav()
