@@ -56,7 +56,7 @@ PageMaker.prototype.book = function () {
 
 PageMaker.prototype.buildArrows = function () {
   var self = this;
-  this.arrows = this._arrows = PageArrows()
+  this.arrows = this._arrows = PageArrows(this._opts.arrows || {})
   this._arrows.on('render', function(elem, index){
     self.emit('arrows:render', elem, index)
   })
@@ -70,7 +70,7 @@ PageMaker.prototype.buildArrows = function () {
 
 PageMaker.prototype.buildNav = function () {
   var self = this;
-  this.nav = this._nav = PageNav()
+  this.nav = this._nav = PageNav(this._opts.nav || {})
   this._nav.buildPages(this._data)
   this._nav.on('page', function(elem, index){
     self.emit('nav:page', elem, index)
