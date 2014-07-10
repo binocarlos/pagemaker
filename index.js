@@ -2,6 +2,9 @@ var Emitter = require('emitter')
 var BookBinding = require('bookbinding')
 var PageTurner = require('pageturner')
 var PageHammer = require('pagehammer')
+var PageArrows = require('pagearrows')
+var PageNav = require('pagenav')
+var PageShadow = require('pageshadow')
 
 module.exports = PageMaker;
 
@@ -30,7 +33,11 @@ PageMaker.prototype.build = function () {
   this._book = PageTurner()
   this._binding = BookBinding()
   this._hammer = PageHammer()
+  this._shadows = PageShadows()
 
+  this.buildArrows()
+  this.buildNav()
+  
   this._book.on('render:book', function(elem){
     self._hammer.setup(elem)
   })
@@ -47,9 +54,8 @@ PageMaker.prototype.book = function () {
   return this._book
 }
 
-/*
 PageMaker.prototype.buildArrows = function () {
-  this._arrows = PageArrows()
+  this.arrows = this._arrows = PageArrows()
   this._arrows.on('render', function(elem, index){
     self.emit('arrows:render', elem, index)
   })
@@ -63,7 +69,7 @@ PageMaker.prototype.buildArrows = function () {
 
 PageMaker.prototype.buildNav = function () {
   var self = this;
-  this._nav = PageNav()
+  this.nav = this._nav = PageNav()
   this._nav.setPages(this._data)
   this._nav.on('page', function(elem, index){
     self.emit('nav:page', elem, index)
@@ -76,7 +82,6 @@ PageMaker.prototype.buildNav = function () {
   })
   this._nav.setPage(0)
 }
-*/
 
 PageMaker.prototype.render = function () {
   return this._binding.element
