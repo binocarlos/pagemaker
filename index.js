@@ -41,6 +41,7 @@ PageMaker.prototype.build = function () {
   this._book.on('render:book', function(elem){
     self._hammer.setup(elem)
   })
+
   this._hammer.on('swipe', function(side, direction){
     self._book.turnDirection(direction)
   })
