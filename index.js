@@ -70,7 +70,7 @@ PageMaker.prototype.buildArrows = function () {
 PageMaker.prototype.buildNav = function () {
   var self = this;
   this.nav = this._nav = PageNav()
-  this._nav.setPages(this._data)
+  this._nav.buildPages(this._data)
   this._nav.on('page', function(elem, index){
     self.emit('nav:page', elem, index)
   })
