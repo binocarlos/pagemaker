@@ -22,21 +22,21 @@ function PageMaker (data, opts) {
   })
   this._data = data || []
   this._opts = opts
+  this.build()
 }
 
 Emitter(PageMaker.prototype)
 
-PageMaker.prototype.build = function (data) {
+PageMaker.prototype.build = function () {
   var self = this;
 
   this._book = PageTurner()
   this._binding = BookBinding()
   this._hammer = PageHammer()
   this._shadows = PageShadow(this._book)
-
   this.buildArrows()
   this.buildNav()
-  
+
   this._book.on('render:book', function(elem){
     self._hammer.setup(elem)
   })
@@ -44,8 +44,15 @@ PageMaker.prototype.build = function (data) {
   this._hammer.on('swipe', function(side, direction){
     self._book.turnDirection(direction)
   })
+}
+
+PageMaker.prototype.load = function (data) {
+  var self = this;
 
   this._data = data
+
+  this._nav.buildPages(this._data)
+  this._nav.setPage(0)
   this._book.loadData(this._data)
   this._binding.appendChild(this._book.render())
   this._book.loadPage(0)
@@ -72,7 +79,7 @@ PageMaker.prototype.buildArrows = function () {
 PageMaker.prototype.buildNav = function () {
   var self = this;
   this.nav = this._nav = PageNav(this._opts.nav || {})
-  this._nav.buildPages(this._data)
+  
   this._nav.on('page', function(elem, index){
     self.emit('nav:page', elem, index)
   })
@@ -82,7 +89,7 @@ PageMaker.prototype.buildNav = function () {
   this._book.on('view:index', function(index, pageCount){
     self._nav.setPage(index, pageCount)
   })
-  this._nav.setPage(0)
+
 }
 
 PageMaker.prototype.render = function () {

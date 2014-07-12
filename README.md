@@ -18,6 +18,12 @@ $ component install binocarlos/pagemaker
 
 ## example
 
+First have your HTML:
+
+```html
+
+```
+
 Create a new book passing in [bookmaker](https://github.com/binocarlos/bookmaker) data:
 
 ```js
@@ -31,9 +37,12 @@ var data = {
 	...]
 }
 var opts = {
-
+	
 }
-var book = PageMaker(data, opts)
+var book = PageMaker(opts)
+
+// load the page data
+book.load(data)
 
 // the book, nav and arrows are seperate elements you can append to your gui
 book.appendTo('#mybook')
