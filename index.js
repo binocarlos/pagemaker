@@ -22,12 +22,11 @@ function PageMaker (data, opts) {
   })
   this._data = data || []
   this._opts = opts
-  this.build()
 }
 
 Emitter(PageMaker.prototype)
 
-PageMaker.prototype.build = function () {
+PageMaker.prototype.build = function (data) {
   var self = this;
 
   this._book = PageTurner()
@@ -46,6 +45,7 @@ PageMaker.prototype.build = function () {
     self._book.turnDirection(direction)
   })
 
+  this._data = data
   this._book.loadData(this._data)
   this._binding.appendChild(this._book.render())
   this._book.loadPage(0)
