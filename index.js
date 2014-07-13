@@ -100,3 +100,9 @@ PageMaker.prototype.appendTo = function (target) {
   if (typeof target === 'string') target = document.querySelector(target)
   target.appendChild(this.render())
 }
+
+PageMaker.prototype.remove = function () {
+  this._binding.element.parentNode.removeChild(this._binding.element)
+  this.arrows.remove()
+  this.nav.remove()
+}
