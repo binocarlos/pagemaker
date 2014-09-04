@@ -50,14 +50,15 @@ PageMaker.prototype.build = function () {
     self._book.turnDirection(direction)
   })
 
-  [
+  var evnames = [
     'render:leaf',
     'data',
     'view:index',
     'view:leaf',
     'turn:start',
     'turn:end'
-  ].forEach(function(name){
+  ]
+  evnames.forEach(function(name){
     self._book.on(name, function(){
       var args = sortArgs(arguments)
       self.emit.apply(self, [name].concat(args))
