@@ -27,6 +27,11 @@ function PageMaker (data, opts) {
 
 Emitter(PageMaker.prototype)
 
+function sortArgs(a){
+  var args = Array.prototype.slice.call(a, 0);
+  return args.sort();
+}
+
 PageMaker.prototype.build = function () {
   var self = this;
 
@@ -43,6 +48,20 @@ PageMaker.prototype.build = function () {
 
   this._hammer.on('swipe', function(side, direction){
     self._book.turnDirection(direction)
+  })
+
+  [
+    'render:leaf',
+    'data',
+    'view:index',
+    'view:leaf',
+    'turn:start',
+    'turn:end'
+  ].forEach(function(name){
+    self._book.on(name, function(){
+      var args = sortArgs(arguments)
+      self.emit.apply(self, [name].concat(args))
+    })
   })
 }
 
